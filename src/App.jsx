@@ -4,13 +4,24 @@ import FileForm from './fileForm';
 
 function App() {
   const [file, setFile] = useState(null);
-  const handleFileChange = (newFile) => {
-    setFile(newFile);
+
+  const readFile = (newFile) => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const contents = reader.result;
+      setFile(contents);
+    };
+    reader.readAsText(newFile);
   };
+
+  const handleFileChange = (newFile) => {
+    readFile(newFile);
+  };
+
   return (
     <div>
       <FileForm fileHandler={handleFileChange} />
-      {file !== null ? <p>{file.name}</p> : null}
+      {file !== null ? <p>{file}</p> : null}
     </div>
   );
 }
