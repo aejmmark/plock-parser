@@ -6,7 +6,7 @@ function PackageList({ packages }) {
     <div>
       <ul>
         {packages
-          .sort((a, b) => a - b)
+          .sort((a, b) => b - a)
           .map((pack) => (
             <li key={pack.name}>{pack.name}</li>
           ))}
