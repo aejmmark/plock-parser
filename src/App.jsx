@@ -11,12 +11,34 @@ function App() {
       .split('[[package]]')
       .filter((pack) => pack.includes('description'))
       .map((pack) => {
-        const splitLines = pack.split('\n');
-        const packData = {
-          name: splitLines[1].replace('name = ', ''),
-          description: splitLines[3].replace('description = ', ''),
-          optional: splitLines[5].includes('true'),
-        };
+        const packData = { dependencies: [] };
+        let dataType = 'package';
+        pack.split('\n').map((line) => {
+          if (line.includes(' = ')) {
+            const lineValues = line.split(' = ');
+            const key = lineValues[0];
+            const value = lineValues[1];
+            if (dataType === 'package') {
+              packData[key] = value;
+            } else if (dataType === 'dependencies') {
+              packData.dependencies = packData.dependencies.concat({
+                name: key,
+                optional: value.includes('optional = true'),
+              });
+            } else if (dataType === 'extras') {
+              packData.dependencies = packData.dependencies.concat({
+                name: key,
+                optional: true,
+              });
+            }
+          } else if (line.includes('[package.dependencies]')) {
+            dataType = 'dependencies';
+          } else if (line.includes('[package.extras]')) {
+            dataType = 'extras';
+          }
+          return line;
+        });
+        console.log(packData);
         return packData;
       });
     return parsedPackages;
