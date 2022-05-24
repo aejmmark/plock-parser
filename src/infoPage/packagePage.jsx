@@ -9,7 +9,7 @@ function PackagePage({ packages }) {
   const selection = useParams().id;
   const selectedPackage = packages.find((pack) => pack.name === selection);
   return (
-    <div>
+    <div className="outerbox">
       <div className="box">
         <h1>{selectedPackage.name}</h1>
         <p>{selectedPackage.description}</p>
