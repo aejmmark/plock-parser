@@ -18,7 +18,7 @@ function FileForm({ fileHandler, resetPackages }) {
 
   return (
     <form className="box" id="form-file-upload">
-      <h2>Insert poetry.lock</h2>
+      <h2>Insert poetry.lock v1.1</h2>
       <label id="label-file-upload" htmlFor="input-file-upload">
         <input
           type="file"
