@@ -19,7 +19,7 @@ const parseExtras = (extras) => {
 };
 
 const parsePackages = (pack) => {
-  const packData = { dependencies: [] };
+  const packData = { dependencies: [], extras: [] };
   let dataType = 'package';
   pack.split('\n').map((line) => {
     if (line.includes(' = ')) {
@@ -32,13 +32,11 @@ const parsePackages = (pack) => {
         packData.dependencies = packData.dependencies.concat({
           name: key,
           optional: value.includes('optional = true'),
-          extras: [],
         });
       } else if (dataType === 'extras') {
-        packData.dependencies = packData.dependencies.concat({
+        packData.extras = packData.extras.concat({
           name: key,
-          optional: true,
-          extras: parseExtras(value),
+          dependencies: parseExtras(value),
         });
       }
     } else if (line.includes('[package.dependencies]')) {
