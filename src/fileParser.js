@@ -53,6 +53,7 @@ const parseFile = (packages) => {
   const parsedPackages = packages
     .split('[metadata]')[0]
     .replace(/['"]+/g, '')
+    .toLowerCase()
     .split('[[package]]')
     .filter((pack) => pack !== '')
     .map((pack) => parsePackages(pack))
