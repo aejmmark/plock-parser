@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import fileParser from './fileParser';
+import { parseFile } from './fileParser';
 import FileForm from './fileForm';
 import PackageList from './packageList';
 
@@ -11,7 +11,7 @@ function App() {
     const reader = new FileReader();
     reader.onloadend = () => {
       const contents = reader.result;
-      const parsedContents = fileParser.parsePackages(contents);
+      const parsedContents = parseFile(contents);
       setPackages(parsedContents);
     };
     reader.readAsText(newFile);

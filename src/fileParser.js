@@ -18,45 +18,47 @@ const parseExtras = (extras) => {
   return parsedExtras;
 };
 
-const parsePackages = (packages) => {
+const parsePackages = (pack) => {
+  const packData = { dependencies: [] };
+  let dataType = 'package';
+  pack.split('\n').map((line) => {
+    if (line.includes(' = ')) {
+      const lineValues = line.split(' = ');
+      const key = lineValues[0];
+      const value = lineValues[1];
+      if (dataType === 'package') {
+        packData[key] = value;
+      } else if (dataType === 'dependencies') {
+        packData.dependencies = packData.dependencies.concat({
+          name: key,
+          optional: value.includes('optional = true'),
+          extras: [],
+        });
+      } else if (dataType === 'extras') {
+        packData.dependencies = packData.dependencies.concat({
+          name: key,
+          optional: true,
+          extras: parseExtras(value),
+        });
+      }
+    } else if (line.includes('[package.dependencies]')) {
+      dataType = 'dependencies';
+    } else if (line.includes('[package.extras]')) {
+      dataType = 'extras';
+    }
+    return line;
+  });
+  console.log(packData);
+  return packData;
+};
+
+const parseFile = (packages) => {
   const parsedPackages = packages
     .replace(/['"]+/g, '')
     .split('[[package]]')
     .filter((pack) => pack !== '')
-    .map((pack) => {
-      const packData = { dependencies: [] };
-      let dataType = 'package';
-      pack.split('\n').map((line) => {
-        if (line.includes(' = ')) {
-          const lineValues = line.split(' = ');
-          const key = lineValues[0];
-          const value = lineValues[1];
-          if (dataType === 'package') {
-            packData[key] = value;
-          } else if (dataType === 'dependencies') {
-            packData.dependencies = packData.dependencies.concat({
-              name: key,
-              optional: value.includes('optional = true'),
-              extras: [],
-            });
-          } else if (dataType === 'extras') {
-            packData.dependencies = packData.dependencies.concat({
-              name: key,
-              optional: true,
-              extras: parseExtras(value),
-            });
-          }
-        } else if (line.includes('[package.dependencies]')) {
-          dataType = 'dependencies';
-        } else if (line.includes('[package.extras]')) {
-          dataType = 'extras';
-        }
-        return line;
-      });
-      console.log(packData);
-      return packData;
-    });
+    .map((pack) => parsePackages(pack));
   return parsedPackages;
 };
 
-export default { parsePackages, parseExtras };
+export default { parseFile };
