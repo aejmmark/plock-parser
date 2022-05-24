@@ -21,9 +21,13 @@ function App() {
     readFile(newFile);
   };
 
+  const resetPackages = () => {
+    setPackages([]);
+  };
+
   return (
     <div>
-      <FileForm fileHandler={handleFileChange} />
+      <FileForm fileHandler={handleFileChange} resetPackages={resetPackages} />
       <PackageList packages={packages} />
     </div>
   );

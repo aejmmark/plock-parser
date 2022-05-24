@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-function FileForm({ fileHandler }) {
-  const [selectedFile, setSelectedFile] = useState(null);
+function FileForm({ fileHandler, resetPackages }) {
+  const [validFile, setValidFile] = useState(true);
 
   const handleFileSelection = (event) => {
     event.preventDefault();
-    setSelectedFile(event.target.files[0]);
-  };
-
-  const handleFileUpload = (event) => {
-    event.preventDefault();
+    const selectedFile = event.target.files[0];
     if (selectedFile.name === 'poetry.lock') {
       fileHandler(selectedFile);
+      setValidFile(true);
     } else {
-      // WIP
+      resetPackages();
+      setValidFile(false);
     }
   };
 
@@ -27,20 +25,15 @@ function FileForm({ fileHandler }) {
           multiple
           onChange={(event) => handleFileSelection(event)}
         />
-        <button
-          type="button"
-          className="upload-button"
-          onClick={(event) => handleFileUpload(event)}
-        >
-          Upload file
-        </button>
       </label>
+      {validFile ? null : <p>invalid file</p>}
     </form>
   );
 }
 
 FileForm.propTypes = {
   fileHandler: PropTypes.func.isRequired,
+  resetPackages: PropTypes.func.isRequired,
 };
 
 export default FileForm;
