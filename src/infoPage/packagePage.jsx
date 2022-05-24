@@ -10,14 +10,10 @@ function PackagePage({ packages }) {
   const selectedPackage = packages.find((pack) => pack.name === selection);
   return (
     <div>
-      <p>
-        name:
-        {selectedPackage.name}
-      </p>
-      <p>
-        description:
-        {selectedPackage.description}
-      </p>
+      <div className="box">
+        <h1>{selectedPackage.name}</h1>
+        <p>{selectedPackage.description}</p>
+      </div>
       <DependencyList
         packages={packages}
         dependencies={selectedPackage.dependencies}

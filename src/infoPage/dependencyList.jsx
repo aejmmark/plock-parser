@@ -4,20 +4,20 @@ import { Link } from 'react-router-dom';
 
 function DependencyList({ packages, dependencies }) {
   return (
-    <div>
-      <p>dependencies:</p>
-      <ul>
+    <div className="box">
+      <h3>dependencies</h3>
+      <dl className="innerbox">
         {dependencies.map((dep) => (
-          <li key={dep.name}>
+          <dt key={dep.name}>
             {packages.find((curr) => curr.name === dep.name) ? (
               <Link to={`/${dep.name}`}>{dep.name}</Link>
             ) : (
               dep.name
             )}
             {dep.optional ? ' (optional)' : null}
-          </li>
+          </dt>
         ))}
-      </ul>
+      </dl>
     </div>
   );
 }

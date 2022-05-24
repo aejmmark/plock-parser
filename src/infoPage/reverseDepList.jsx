@@ -6,16 +6,16 @@ function ReverseDepList({ packages, selection }) {
   const reverseDependecies = packages.filter((pack) => pack
     .dependencies.map((dep) => dep.name).includes(selection));
   return (
-    <div>
-      <p>reverse dependencies:</p>
-      <ul>
+    <div className="box">
+      <h3>reverse dependencies</h3>
+      <dl className="innerbox">
         {reverseDependecies.map((dep) => (
-          <li key={dep.name}>
+          <dt key={dep.name}>
             <Link to={`/${dep.name}`}>{dep.name}</Link>
             {dep.optional === 'true' ? ' (optional)' : null}
-          </li>
+          </dt>
         ))}
-      </ul>
+      </dl>
     </div>
   );
 }

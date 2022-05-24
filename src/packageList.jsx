@@ -3,17 +3,17 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 function PackageList({ packages }) {
-  return (
-    <div>
-      <ul>
+  return packages.length !== 0 ? (
+    <div className="box">
+      <dl>
         {packages.map((pack) => (
-          <li key={pack.name}>
+          <dt key={pack.name}>
             <Link to={`/${pack.name}`}>{pack.name}</Link>
-          </li>
+          </dt>
         ))}
-      </ul>
+      </dl>
     </div>
-  );
+  ) : null;
 }
 
 PackageList.propTypes = {

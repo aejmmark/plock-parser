@@ -28,12 +28,17 @@ function App() {
   };
 
   return (
-    <div>
-      <FileForm fileHandler={handleFileChange} resetPackages={resetPackages} />
-      <Routes>
-        <Route path="/:id" element={<PackagePage packages={packages} />} />
-        <Route path="/" element={<PackageList packages={packages} />} />
-      </Routes>
+    <div className="center">
+      <div className="outerbox">
+        <FileForm
+          fileHandler={handleFileChange}
+          resetPackages={resetPackages}
+        />
+        <Routes>
+          <Route path="/:id" element={<PackagePage packages={packages} />} />
+          <Route path="/" element={<PackageList packages={packages} />} />
+        </Routes>
+      </div>
     </div>
   );
 }

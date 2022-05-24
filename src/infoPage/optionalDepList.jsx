@@ -4,22 +4,22 @@ import { Link } from 'react-router-dom';
 
 function OptionalDepList({ packages, extras }) {
   return (
-    <div>
-      <p>optional dependency sets:</p>
+    <div className="box">
+      <h3>optional dependency sets</h3>
       {extras.map((set) => (
-        <div key={set.name}>
-          <p>{set.name}</p>
-          <ul>
+        <div className="innerbox" key={set.name}>
+          <b>{set.name}</b>
+          <dl>
             {set.dependencies.map((dep) => (
-              <li key={`${set.name}-${dep}`}>
+              <dt key={`${set.name}-${dep}`}>
                 {packages.find((curr) => curr.name === dep) ? (
                   <Link to={`/${dep}`}>{dep}</Link>
                 ) : (
                   dep
                 )}
-              </li>
+              </dt>
             ))}
-          </ul>
+          </dl>
         </div>
       ))}
     </div>

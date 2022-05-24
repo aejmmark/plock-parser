@@ -17,7 +17,8 @@ function FileForm({ fileHandler, resetPackages }) {
   };
 
   return (
-    <form id="form-file-upload">
+    <form className="box" id="form-file-upload">
+      <h2>Insert poetry.lock</h2>
       <label id="label-file-upload" htmlFor="input-file-upload">
         <input
           type="file"
@@ -26,7 +27,11 @@ function FileForm({ fileHandler, resetPackages }) {
           onChange={(event) => handleFileSelection(event)}
         />
       </label>
-      {validFile ? null : <p>invalid file</p>}
+      {validFile ? null : (
+        <p>
+          <b>invalid file</b>
+        </p>
+      )}
     </form>
   );
 }
