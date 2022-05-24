@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import fileParser from './fileParser';
 import FileForm from './fileForm';
 import PackageList from './packageList';
+import PackagePage from './packagePage';
 
 function App() {
   const [packages, setPackages] = useState([]);
@@ -28,7 +30,10 @@ function App() {
   return (
     <div>
       <FileForm fileHandler={handleFileChange} resetPackages={resetPackages} />
-      <PackageList packages={packages} />
+      <Routes>
+        <Route path="/:id" element={<PackagePage packages={packages} />} />
+        <Route path="/" element={<PackageList packages={packages} />} />
+      </Routes>
     </div>
   );
 }

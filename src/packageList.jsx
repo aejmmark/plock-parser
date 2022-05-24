@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 function PackageList({ packages }) {
@@ -6,7 +7,9 @@ function PackageList({ packages }) {
     <div>
       <ul>
         {packages.map((pack) => (
-          <li key={pack.name}>{pack.name}</li>
+          <li key={pack.name}>
+            <Link to={`/${pack.name}`}>{pack.name}</Link>
+          </li>
         ))}
       </ul>
     </div>
