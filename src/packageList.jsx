@@ -5,11 +5,9 @@ function PackageList({ packages }) {
   return (
     <div>
       <ul>
-        {packages
-          .sort((a, b) => b - a)
-          .map((pack) => (
-            <li key={pack.name}>{pack.name}</li>
-          ))}
+        {packages.map((pack) => (
+          <li key={pack.name}>{pack.name}</li>
+        ))}
       </ul>
     </div>
   );

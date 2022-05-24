@@ -57,7 +57,8 @@ const parseFile = (packages) => {
     .replace(/['"]+/g, '')
     .split('[[package]]')
     .filter((pack) => pack !== '')
-    .map((pack) => parsePackages(pack));
+    .map((pack) => parsePackages(pack))
+    .sort((a, b) => b.name - a.name);
   return parsedPackages;
 };
 
