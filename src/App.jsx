@@ -4,7 +4,7 @@ import './App.css';
 import fileParser from './fileParser';
 import FileForm from './fileForm';
 import PackageList from './packageList';
-import PackagePage from './packagePage';
+import PackagePage from './infoPage/packagePage';
 
 function App() {
   const [packages, setPackages] = useState([]);
