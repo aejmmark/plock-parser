@@ -10,7 +10,7 @@ function ReverseDepList({ packages, selection }) {
       <p>reverse dependencies:</p>
       <ul>
         {reverseDependecies.map((dep) => (
-          <li>
+          <li key={dep.name}>
             <Link to={`/${dep.name}`}>{dep.name}</Link>
             {dep.optional === 'true' ? ' (optional)' : null}
           </li>

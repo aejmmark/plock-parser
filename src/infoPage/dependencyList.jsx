@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-function DependencyList({ packages, selectedPackage }) {
+function DependencyList({ packages, dependencies }) {
   return (
     <div>
       <p>dependencies:</p>
       <ul>
-        {selectedPackage.dependencies.map((dep) => (
-          <li>
+        {dependencies.map((dep) => (
+          <li key={dep.name}>
             {packages.find((curr) => curr.name === dep.name) ? (
               <Link to={`/${dep.name}`}>{dep.name}</Link>
             ) : (
@@ -24,7 +24,7 @@ function DependencyList({ packages, selectedPackage }) {
 
 DependencyList.propTypes = {
   packages: PropTypes.arrayOf(PropTypes.shape).isRequired,
-  selectedPackage: PropTypes.shape.isRequired,
+  dependencies: PropTypes.arrayOf(PropTypes.shape).isRequired,
 };
 
 export default DependencyList;

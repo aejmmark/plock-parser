@@ -18,9 +18,12 @@ function PackagePage({ packages }) {
         description:
         {selectedPackage.description}
       </p>
-      <DependencyList packages={packages} selectedPackage={selectedPackage} />
+      <DependencyList
+        packages={packages}
+        dependencies={selectedPackage.dependencies}
+      />
       <ReverseDepList packages={packages} selection={selection} />
-      <OptionalDepList packages={packages} selectedPackage={selectedPackage} />
+      <OptionalDepList packages={packages} extras={selectedPackage.extras} />
     </div>
   );
 }
