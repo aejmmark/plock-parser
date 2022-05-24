@@ -46,7 +46,6 @@ const parsePackages = (pack) => {
     }
     return line;
   });
-  console.log(packData);
   return packData;
 };
 
