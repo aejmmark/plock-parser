@@ -5,8 +5,8 @@ import { useParams, Link } from 'react-router-dom';
 function PackagePage({ packages }) {
   const selection = useParams().id;
   const selectedPackage = packages.find((pack) => pack.name === selection);
-  const reverseDependecies = packages
-    .filter((pack) => pack.dependencies.map((dep) => dep.name).includes(selection));
+  const reverseDependecies = packages.filter((pack) => pack
+    .dependencies.map((dep) => dep.name).includes(selection));
   return (
     <div>
       <p>
@@ -39,6 +39,23 @@ function PackagePage({ packages }) {
           </li>
         ))}
       </ul>
+      <p>optional dependency sets:</p>
+      {selectedPackage.extras.map((set) => (
+        <div>
+          <p>{set.name}</p>
+          <ul>
+            {set.dependencies.map((dep) => (
+              <li>
+                {packages.find((curr) => curr.name === dep) ? (
+                  <Link to={`/${dep}`}>{dep}</Link>
+                ) : (
+                  dep
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
     </div>
   );
 }
