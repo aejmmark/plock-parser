@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import fileParser from '../fileParser';
 
 function FileForm({ packageHandler }) {
-  const defaultMessage = 'Insert poetry.lock v1.1';
+  const defaultMessage = 'Click here!';
   const [message, setMessage] = useState(defaultMessage);
 
   const readFile = (newFile) => {
@@ -19,20 +19,23 @@ function FileForm({ packageHandler }) {
   const handleFileSelection = (event) => {
     event.preventDefault();
     const selectedFile = event.target.files[0];
-    if (selectedFile.name === 'poetry.lock') {
-      readFile(selectedFile);
-      setMessage(':)');
-    } else {
-      packageHandler([]);
-      setMessage('invalid file :(');
+    if (selectedFile !== undefined) {
+      if (selectedFile.name === 'poetry.lock') {
+        readFile(selectedFile);
+        setMessage(':)');
+      } else {
+        packageHandler([]);
+        setMessage('invalid file :(');
+      }
+      setTimeout(() => {
+        setMessage(defaultMessage);
+      }, '3000');
     }
-    setTimeout(() => {
-      setMessage(defaultMessage);
-    }, '3000');
   };
 
   return (
     <form className="box">
+      <p>Poetry.lock v1.1 parser</p>
       <h2>{message}</h2>
       <label
         className="file-change"
