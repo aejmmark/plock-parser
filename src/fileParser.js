@@ -31,7 +31,7 @@ const parsePackages = (pack) => {
       } else if (dataType === 'dependencies') {
         packData.dependencies = packData.dependencies.concat({
           name: key,
-          optional: value.includes('optional = true'),
+          optional: line.includes('optional = true'),
         });
       } else if (dataType === 'extras') {
         packData.extras = packData.extras.concat({
