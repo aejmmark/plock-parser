@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import DependencyList from './dependencyList';
 import ReverseDepList from './reverseDepList';
-import OptionalDepList from './optionalDepList';
+import ExtrasList from './extrasList';
 
 function PackagePage({ packages }) {
   let component;
@@ -21,7 +21,7 @@ function PackagePage({ packages }) {
           dependencies={selectedPackage.dependencies}
         />
         <ReverseDepList packages={packages} selection={selection} />
-        <OptionalDepList packages={packages} extras={selectedPackage.extras} />
+        <ExtrasList packages={packages} extras={selectedPackage.extras} />
       </div>
     );
   } else {

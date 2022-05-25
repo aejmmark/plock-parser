@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 function OptionalDepList({ packages, extras }) {
   return (
     <div className="box">
-      <h3>optional dependency sets</h3>
+      <h3>extras</h3>
       {extras.map((set) => (
         <div className="innerbox" key={set.name}>
           <b>{set.name}</b>
