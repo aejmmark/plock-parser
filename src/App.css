@@ -50,3 +50,18 @@
   text-align: center;
   flex-direction: column;
 }
+
+input[type='file'] {
+  display: none;
+}
+
+.file-change {
+  border: 1px solid #ccc;
+  width: 360px;
+  height: 90px;
+  position: absolute;
+  border-radius: 20px;
+  opacity: 0;
+  display: inline-block;
+  cursor: pointer;
+}
