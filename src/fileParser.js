@@ -42,7 +42,7 @@ const parsePackages = (pack) => {
   return packData;
 };
 
-const parseFile = (packages) => {
+const parseFileContents = (packages) => {
   const parsedPackages = packages
     .split('[metadata]')[0]
     .replace(/['"]+/g, '')
@@ -54,4 +54,4 @@ const parseFile = (packages) => {
   return parsedPackages;
 };
 
-export default { parseFile };
+export default { parseFileContents };

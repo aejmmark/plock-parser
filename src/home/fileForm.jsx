@@ -1,32 +1,36 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import fileParser from '../fileParser';
 
-function FileForm({ fileHandler, resetPackages }) {
+function FileForm({ packageHandler }) {
   const [validFile, setValidFile] = useState(true);
+
+  const readFile = (newFile) => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const contents = reader.result;
+      const parsedContents = fileParser.parseFileContents(contents);
+      packageHandler(parsedContents);
+    };
+    reader.readAsText(newFile);
+  };
 
   const handleFileSelection = (event) => {
     event.preventDefault();
     const selectedFile = event.target.files[0];
     if (selectedFile.name === 'poetry.lock') {
-      fileHandler(selectedFile);
+      readFile(selectedFile);
       setValidFile(true);
     } else {
-      resetPackages();
+      packageHandler([]);
       setValidFile(false);
     }
   };
 
   return (
-    <form className="box" id="form-file-upload">
+    <form className="box">
       <h2>Insert poetry.lock v1.1</h2>
-      <label id="label-file-upload" htmlFor="input-file-upload">
-        <input
-          type="file"
-          id="input-file-upload"
-          multiple
-          onChange={(event) => handleFileSelection(event)}
-        />
-      </label>
+      <input type="file" onChange={(event) => handleFileSelection(event)} />
       {validFile ? null : (
         <p>
           <b>invalid file</b>
@@ -37,8 +41,7 @@ function FileForm({ fileHandler, resetPackages }) {
 }
 
 FileForm.propTypes = {
-  fileHandler: PropTypes.func.isRequired,
-  resetPackages: PropTypes.func.isRequired,
+  packageHandler: PropTypes.func.isRequired,
 };
 
 export default FileForm;

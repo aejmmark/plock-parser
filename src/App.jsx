@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
-import PackagePage from './infoPage/packagePage';
-import HomePage from './homePage';
+import PackagePage from './packageInfo/packagePage';
+import HomePage from './home/homePage';
 
 function App() {
   const [packages, setPackages] = useState([]);
