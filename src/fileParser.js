@@ -1,10 +1,11 @@
 const parseExtras = (extras) => {
-  const splitExtras = extras.split(', ');
+  const splitExtras = extras.slice(1, -1).split(', ');
   const parsedExtras = splitExtras.map((extra) => {
     let newExtra = extra;
     if (extra.includes(' ')) {
       const split = newExtra.split(' ');
-      newExtra = split[0].replace(/[\][]/g, '');
+      const name = 0;
+      newExtra = split[name];
     }
     return newExtra;
   });
@@ -54,4 +55,4 @@ const parseFileContents = (packages) => {
   return parsedPackages;
 };
 
-export default { parseFileContents };
+export default { parseFileContents, parseExtras, parsePackages };
