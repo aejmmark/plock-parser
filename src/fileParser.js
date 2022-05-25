@@ -1,17 +1,10 @@
 const parseExtras = (extras) => {
   const splitExtras = extras.split(', ');
-  const parsedExtras = splitExtras.map((extra, index) => {
+  const parsedExtras = splitExtras.map((extra) => {
     let newExtra = extra;
     if (extra.includes(' ')) {
       const split = newExtra.split(' ');
-      const name = 0;
-      newExtra = split[name];
-    }
-    if (index === 0) {
-      newExtra = newExtra.substring(1);
-    }
-    if (index === splitExtras.length - 1) {
-      newExtra = newExtra.slice(0, -1);
+      newExtra = split[0].replace(/[\][]/g, '');
     }
     return newExtra;
   });
