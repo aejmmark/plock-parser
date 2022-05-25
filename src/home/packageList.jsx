@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 function PackageList({ packages }) {
   return packages.length !== 0 ? (
     <div className="box">
+      <h3>Installed packages</h3>
       <dl>
         {packages.map((pack) => (
           <dt key={pack.name}>
