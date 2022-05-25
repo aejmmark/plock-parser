@@ -8,7 +8,7 @@ function ReverseDepList({ packages, selection }) {
   return (
     <div className="box">
       <h3>reverse dependencies</h3>
-      <dl className="innerbox">
+      <dl>
         {reverseDependecies.map((dep) => (
           <dt key={dep.name}>
             <Link to={`/${dep.name}`}>{dep.name}</Link>

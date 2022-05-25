@@ -6,7 +6,7 @@ function DependencyList({ packages, dependencies }) {
   return (
     <div className="box">
       <h3>dependencies</h3>
-      <dl className="innerbox">
+      <dl>
         {dependencies.map((dep) => (
           <dt key={dep.name}>
             {packages.find((curr) => curr.name === dep.name) ? (
