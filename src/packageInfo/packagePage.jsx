@@ -6,22 +6,28 @@ import ReverseDepList from './reverseDepList';
 import OptionalDepList from './optionalDepList';
 
 function PackagePage({ packages }) {
-  const selection = useParams().id;
-  const selectedPackage = packages.find((pack) => pack.name === selection);
-  return (
-    <div className="outerbox">
-      <div className="box">
-        <h1>{selectedPackage.name}</h1>
-        <p>{selectedPackage.description}</p>
+  let component;
+  if (packages.length > 0) {
+    const selection = useParams().id;
+    const selectedPackage = packages.find((pack) => pack.name === selection);
+    component = (
+      <div className="outerbox">
+        <div className="box">
+          <h1>{selectedPackage.name}</h1>
+          <p>{selectedPackage.description}</p>
+        </div>
+        <DependencyList
+          packages={packages}
+          dependencies={selectedPackage.dependencies}
+        />
+        <ReverseDepList packages={packages} selection={selection} />
+        <OptionalDepList packages={packages} extras={selectedPackage.extras} />
       </div>
-      <DependencyList
-        packages={packages}
-        dependencies={selectedPackage.dependencies}
-      />
-      <ReverseDepList packages={packages} selection={selection} />
-      <OptionalDepList packages={packages} extras={selectedPackage.extras} />
-    </div>
-  );
+    );
+  } else {
+    component = <h2>Invalid url!</h2>;
+  }
+  return component;
 }
 
 PackagePage.propTypes = {
