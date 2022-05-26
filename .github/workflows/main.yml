@@ -11,8 +11,16 @@ jobs:
     environment: heroku
     steps:
       - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.12.12
+      - name: Run tests
+        uses: actions/setup-node@v1
         with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
-          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          node-version: '16'
+      - run: npm ci
+      - run: npm test
+      - name: Push on test success
+        if: ${{ success() }}
+        uses: akhileshns/heroku-deploy@v3.12.12
+          with:
+            heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+            heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+            heroku_email: ${{secrets.HEROKU_EMAIL}}
