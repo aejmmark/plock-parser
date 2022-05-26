@@ -18,7 +18,7 @@ const parsePackages = (pack) => {
   pack.split('\n').map((line) => {
     if (line.includes(' = ')) {
       const lineValues = line.split(' = ');
-      const key = lineValues[0];
+      const key = lineValues[0].replace(/[-]+/g, '');
       const value = lineValues[1];
       if (dataType === 'package') {
         packData[key] = value;
