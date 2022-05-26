@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-function OptionalDepList({ packages, extras }) {
+function ExtrasList({ packages, extras }) {
   return (
     <div className="box">
       <h3>extras</h3>
@@ -26,9 +26,9 @@ function OptionalDepList({ packages, extras }) {
   );
 }
 
-OptionalDepList.propTypes = {
+ExtrasList.propTypes = {
   packages: PropTypes.arrayOf(PropTypes.shape).isRequired,
   extras: PropTypes.arrayOf(PropTypes.shape).isRequired,
 };
 
-export default OptionalDepList;
+export default ExtrasList;
