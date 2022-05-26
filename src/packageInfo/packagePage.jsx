@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import DependencyList from './dependencyList';
 import ReverseDepList from './reverseDepList';
 import ExtrasList from './extrasList';
@@ -13,6 +13,7 @@ function PackagePage({ packages }) {
     component = (
       <div className="outerbox">
         <div className="box">
+          <Link to="/">home</Link>
           <h1>{selectedPackage.name}</h1>
           <p>{selectedPackage.description}</p>
         </div>
